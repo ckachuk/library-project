@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Library Project</title>
+</head>
+<body >
+    <div id="main">
+        <header>
+            <h1>Library Project</h1>
+        </header>
+        
+        <div class="addBook">
+            <button id='addBookButton'>ADD BOOK</button>
+        </div>
+    
+        
+        <div class="conteiner">
+    
+        </div>
+
+        <footer></footer>
+    </div>
+
+    <div class="formAddBookConteiner">
+        <form  class="formAddBook" method= 'GET'>
+            <h1>New Book</h1>
+    
+            <label for="title">Title:</label>
+            <input type="text" placeholder="Enter the title" name="title" id="titleForm" value=""required>
+    
+            <label for="author">Author:</label>
+            <input type="text" placeholder="Enter the author" name="author" id="authorForm" value=""required>
+    
+            <label for="pages">Number of pages:</label>
+            <input type="text" placeholder="Enter number of pages" name="pages" id="pagesForm" value=""required>
+            
+            <label for="read">Read?</label>
+            <label class="switch">
+                <input type="checkbox" name="read" id="readForm" >
+                <span class="slider round" ></span>
+            </label>
+    
+            <button type="submit" class="addBtn">ADD</button>
+        </form>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
