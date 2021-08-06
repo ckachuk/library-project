@@ -1,0 +1,176 @@
+:root{
+    --primary-color: #002300;
+    --secondary-color: #00562a;
+    --content-color: rgba(0, 86, 42, 0.6);
+    --body-color:#ffffd9;
+    --button-color: #ff5c32;
+    --input-color: #ffffb2;
+
+}
+body{
+    background-color: var(--body-color);
+    color: var(--body-color);
+}
+
+label{
+    color: var(--primary-color)
+}
+
+
+h1{
+    color:var(--body-color);
+}
+
+header{
+    background-color: var(--primary-color);
+    padding: 20px 20px;
+    
+}
+
+
+.addBook{
+    display: flex;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    flex-wrap: wrap;
+}
+
+#addBookButton{
+    background-color: var(--button-color);
+    border: none;
+    color: var(--primary-color)
+}
+
+
+input{
+    height: 40px;
+    width: 200px;
+    padding: 5px;
+    margin: 5px 0px 5px 0px;
+    background-color: var(--input-color);
+    border-radius: 5px;
+    border: none;
+    
+}
+
+.formAddBookConteiner{
+    display: none;
+   
+}
+
+.formAddBook{  
+    background-color: var(--content-color);
+    padding: 40px 40px 70px 40px;
+    border-radius: 5px;
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    width: 200px;
+    height: 350px;
+}
+
+.addBtn{
+    display: block;
+    width: 100px;
+    height: 50px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-color);
+    color: var(--primary-color)
+}
+
+#addBookButton{
+    width: 200px;
+    height: 50px;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .conteiner{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+  }
+  .books{
+      display: block;
+      padding: 10px;
+      margin: 30px;
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+      background-color: var(--content-color);
+
+  }
+  
+  @media only screen and (max-width: 600px) {
+    
+    .formAddBook{  
+        position: static;
+        width: 200px;
+        height: 350px;
+    }
+}
