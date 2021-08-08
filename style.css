@@ -7,13 +7,15 @@
     --input-color: #ffffb2;
 
 }
+
 body{
     background-color: var(--body-color);
     color: var(--body-color);
+    font-family: 'Nunito', sans-serif;
 }
 
 label{
-    color: var(--primary-color)
+    color: var(--primary-color);
 }
 
 
@@ -38,7 +40,8 @@ header{
 #addBookButton{
     background-color: var(--button-color);
     border: none;
-    color: var(--primary-color)
+    color: var(--primary-color);
+    font-size: 22px;
 }
 
 
@@ -52,6 +55,7 @@ input{
     border: none;
     
 }
+
 
 .formAddBookConteiner{
     display: none;
@@ -76,6 +80,7 @@ input{
     margin: 10px auto;
     border: none;
     border-radius: 5px;
+    font-size: 20px;
     background-color: var(--button-color);
     color: var(--primary-color)
 }
@@ -83,6 +88,80 @@ input{
 #addBookButton{
     width: 200px;
     height: 50px;
+}
+
+
+
+  .conteiner{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+  }
+  .books{
+      display: block;
+      padding: 10px;
+      margin: 30px;
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+      background-color: var(--content-color);
+
+  }
+
+p{
+    font-size: 18px;
+}
+
+button:hover{
+    font-size: 25px;
+    color: var(--body-color);
+}
+
+#addBookButton:hover{
+    font-size: 25px;
+    color: var(--body-color);
+}
+
+.deleteButton{
+    width: 90px;
+    height: 35px;
+    background-color: tomato;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.deleteButton:hover{
+    font-size: 18px;
+}
+
+#bookReadButton{
+    width: 90px;
+    height: 35px;
+    background-color: tomato;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+    
+}
+
+#bookUnreadButton{
+    width: 90px;
+    height: 35px;
+    background-color: var(--primary-color);
+    color: tomato;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+#bookReadButton:hover{
+    font-size: 18px;
+}
+
+#bookUnreadButton:hover{
+    font-size: 18px;
 }
 
 
@@ -103,6 +182,7 @@ input{
   
   /* The slider */
   .slider {
+    
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -127,11 +207,11 @@ input{
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: var(--button-color)
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px var(--button-color)
   }
   
   input:checked + .slider:before {
@@ -148,25 +228,8 @@ input{
   .slider.round:before {
     border-radius: 50%;
   }
-
-  .conteiner{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-   
-  }
-  .books{
-      display: block;
-      padding: 10px;
-      margin: 30px;
-      height: 200px;
-      width: 200px;
-      border-radius: 10px;
-      background-color: var(--content-color);
-
-  }
   
-  @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     
     .formAddBook{  
         position: static;
