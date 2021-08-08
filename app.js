@@ -1,7 +1,7 @@
 
 //global variables
 const myLibrary = [];
-
+let formOpen = false;
 
 
 const conteinerBooks = document.querySelector(".conteiner");
@@ -16,12 +16,12 @@ function Book(bookId, title, author, nPages, read){
     this.read = read;
 }
 
-Book.prototype.iReadThisBook = function(book){
-    if(book === true){
-        return true;
+Book.prototype.changeReadThisBook = function(){
+    if(this.read === true){
+        return this.read = false
     }
     else{
-        return false;
+        return this.read = true;
     }
 }
 
@@ -49,6 +49,24 @@ const addStatementToDiv = function (pKey, pValue, element){
     return paragraph;
 } 
 
+const addCheckboxToDiv = function(){
+    const label = document.createElement('label');
+    label.className = 'switch';
+    const input = document.createElement('input');
+    input.className = 'readForm'
+    input.type = 'checkbox';
+    input.id = 'checkBook';
+    const span = document.createElement('span');
+    span.className = 'slider round';
+
+    label.appendChild(input);
+    label.appendChild(span);
+
+    return label;
+}
+
+
+
 const displayLibrary = function(array){
     array.forEach(element => {
         const div = document.createElement('div');
@@ -57,11 +75,32 @@ const displayLibrary = function(array){
         div.appendChild(addStatementToDiv('Title', element.title, 'p'));
         div.appendChild(addStatementToDiv('Author', element.author, 'p'));
         div.appendChild(addStatementToDiv('Number of pages', element.nPages, 'p'));
-        div.appendChild(addStatementToDiv('Read?', element.read, 'p'));
+        
         div.id = element.bookId;
+
+        const bookReadButton = document.createElement('button');
+        bookReadButton.className = 'bookReadButton'
+        if(element.read === true){
+            bookReadButton.textContent = 'READ';
+            bookReadButton.id = 'bookReadButton'
+        }
+        else{
+            bookReadButton.textContent = 'UNREAD';
+            bookReadButton.id = 'bookUnreadButton'
+        }
+
+        bookReadButton.onclick = function(){
+            element.changeReadThisBook();
+            removeChildConteiner(); 
+            displayLibrary(myLibrary);
+            
+        }
+
+        div.appendChild(bookReadButton);
         
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'DELETE';
+        deleteButton.className = 'deleteButton';
         
         deleteButton.onclick = function(){
             removeBookFromLibrary(div.id); 
@@ -73,33 +112,6 @@ const displayLibrary = function(array){
         
         conteinerBooks.appendChild(div);
 
-
-       /*
-       another way to resolve this function
-        const p1 = document.createElement('p');
-        p1.textContent = `Title: ${element.title}`;
-
-    
-        div.appendChild(p1);
-        
-
-        const p2 = document.createElement('p');
-        p2.textContent = element.author;
-
-        div.appendChild(p2);
-        
-
-        const p3 = document.createElement('p');
-        p3.textContent = element.nPages;
-
-        div.appendChild(p3);
-
-        const p4 = document.createElement('p');
-        p4.textContent = element.read;
-        div.appendChild(p4);
-
-        conteinerBooks.appendChild(div);
-        */
     });   
 }
 
@@ -109,6 +121,7 @@ const removeChildConteiner = function(){
     }
 }
 
+
 const openFormAddBook = function(){
     document.querySelector('.formAddBookConteiner').style.display = 'block';
     document.getElementById('main').style.opacity = '0.2';
@@ -117,6 +130,7 @@ const openFormAddBook = function(){
 const closeFormAddBook = function(){
     document.querySelector('.formAddBookConteiner').style.display = 'none';
     document.getElementById('main').style.opacity = '1';
+    
 }
 
 
@@ -138,9 +152,9 @@ const addBookFromFormToLibrary = function(e){
 // EVENTS
 
 
-const displayFormAddBook = document.querySelector('#addBookButton');
+//const displayFormAddBook = document.querySelector('#addBookButton');
 
-displayFormAddBook.addEventListener('click', openFormAddBook);
+//displayFormAddBook.addEventListener('click', openFormAddBook);
 
 const formAddBook = document.querySelector('.formAddBook');
 
@@ -156,4 +170,16 @@ formAddBook.addEventListener('submit', (e)=>{
     displayLibrary(myLibrary);
 });
 
+
+document.addEventListener('click', (e) =>{
+    if (e.target.matches('#addBookButton')) {
+        openFormAddBook();
+    }
+    else if(!e.target.closest('.formAddBookConteiner')){
+        closeFormAddBook();
+    }
+   
+    
+    
+}, false);
 
