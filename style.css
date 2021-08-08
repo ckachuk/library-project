@@ -92,25 +92,27 @@ input{
 
 
 
-  .conteiner{
+.conteiner{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
    
-  }
-  .books{
+}
+
+.books{
       display: block;
       padding: 10px;
       margin: 30px;
-      height: 200px;
+      height: 250px;
       width: 200px;
       border-radius: 10px;
       background-color: var(--content-color);
 
-  }
+}
 
 p{
     font-size: 18px;
+    margin: 30px 0px 25px 0px
 }
 
 button:hover{
