@@ -194,11 +194,15 @@ const JSONToBook = (book) => {
 }
 
 // EVENTS
-window.addEventListener('load',()=>{
-    retrieveDataToLocalStorage()
-    displayLibrary(myLibrary);
-});
-
+if (storageAvailable('localStorage')) {
+    window.addEventListener('load',()=>{
+        retrieveDataToLocalStorage()
+        displayLibrary(myLibrary);
+    });    
+}
+else {
+    console.alert('ERROR');
+}
 
 const formAddBook = document.querySelector('.formAddBook');
 
