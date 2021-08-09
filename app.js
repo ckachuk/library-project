@@ -8,6 +8,31 @@ const conteinerBooks = document.querySelector(".conteiner");
 
 //functions
 
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
 function Book(bookId, title, author, nPages, read){
     this.bookId = bookId;
     this.title = title;
@@ -30,12 +55,14 @@ Book.prototype.changeReadThisBook = function(){
 
 const addBookToLibrary = function (bookObject){
     myLibrary.push(bookObject);
+    saveLibraryLocalStorage(myLibrary);
 }
 
 const removeBookFromLibrary = function(divId){
     for(let i = 0; i < myLibrary.length; i++){
         if(myLibrary[i].bookId == divId){
             myLibrary.splice(i, 1);
+            saveLibraryLocalStorage(myLibrary);
             return;
         }
     }
@@ -93,6 +120,7 @@ const displayLibrary = function(array){
             element.changeReadThisBook();
             removeChildConteiner(); 
             displayLibrary(myLibrary);
+            saveLibraryLocalStorage(myLibrary);
             
         }
 
@@ -148,13 +176,35 @@ const addBookFromFormToLibrary = function(e){
 }
 
 
+const saveLibraryLocalStorage = function(array){
+    localStorage.setItem('libraryArray', JSON.stringify(array));
+}
+
+const retrieveDataToLocalStorage = function(){
+    let localStorageLibrary = JSON.parse(localStorage.getItem('libraryArray') || '[]');
+    if(localStorageLibrary.length){
+        localStorageLibrary.forEach(element => {
+            myLibrary.push(JSONToBook(element));
+        });
+    }
+   
+}
+
+const JSONToBook = (book) => {
+    return new Book(myLibrary.length, book.title, book.author, book.nPages, book.read);
+}
 
 // EVENTS
-
-
-//const displayFormAddBook = document.querySelector('#addBookButton');
-
-//displayFormAddBook.addEventListener('click', openFormAddBook);
+if (storageAvailable('localStorage')) {
+    window.addEventListener('load',()=>{
+        retrieveDataToLocalStorage()
+        displayLibrary(myLibrary);
+    });
+    
+ }
+else {
+    console.alert('ERROR');
+}
 
 const formAddBook = document.querySelector('.formAddBook');
 
@@ -162,12 +212,13 @@ formAddBook.addEventListener('submit', (e)=>{
     e.preventDefault();
 
     addBookFromFormToLibrary();
-
+    
     document.forms[0].reset();
 
     closeFormAddBook();
     removeChildConteiner();
     displayLibrary(myLibrary);
+   
 });
 
 
@@ -177,9 +228,6 @@ document.addEventListener('click', (e) =>{
     }
     else if(!e.target.closest('.formAddBookConteiner')){
         closeFormAddBook();
-    }
-   
-    
-    
+    }  
 }, false);
 
