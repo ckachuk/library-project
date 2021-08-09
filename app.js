@@ -121,7 +121,6 @@ const displayLibrary = function(array){
             removeChildConteiner(); 
             displayLibrary(myLibrary);
             saveLibraryLocalStorage(myLibrary);
-            
         }
 
         div.appendChild(bookReadButton);
@@ -195,16 +194,11 @@ const JSONToBook = (book) => {
 }
 
 // EVENTS
-if (storageAvailable('localStorage')) {
-    window.addEventListener('load',()=>{
-        retrieveDataToLocalStorage()
-        displayLibrary(myLibrary);
-    });
-    
- }
-else {
-    console.alert('ERROR');
-}
+window.addEventListener('load',()=>{
+    retrieveDataToLocalStorage()
+    displayLibrary(myLibrary);
+});
+
 
 const formAddBook = document.querySelector('.formAddBook');
 
